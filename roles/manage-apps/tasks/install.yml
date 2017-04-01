@@ -1,0 +1,35 @@
+---
+
+# ====================================================             System Tools
+- name: Install System Tool Apps
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - terminator
+    - python-pip
+  tags:
+    - install
+    - apps-system
+
+
+# ===================================================                Media Apps
+- name: Add apt_repository for Media Apps
+  script: "{{ item }}"
+  with_items:
+    - "{{ apps_repo_script }}{{ add_apps_repo_folder }}{{ media_apps_repo }}"
+  tags:
+    - install
+    - add-repo
+    - apps-media
+
+
+- name: Install Media Apps
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - clementine
+  tags:
+    - install
+    - apps-media

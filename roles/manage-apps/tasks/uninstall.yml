@@ -1,0 +1,28 @@
+---
+
+# ===================================================              System Tools
+- name: Remove System Tool Apps
+  apt:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - terminator
+    - python-pip
+  tags:
+    - uninstall
+
+# ===================================================                Media Apps
+- name: Remove Clementine apt Repository
+  script: "{{ item }}"
+  with_items:
+    - "{{ apps_repo_script }}{{ remove_apps_repo_folder }}{{ media_apps_repo }}"
+  tags:
+    - uninstall
+    - remove-repo
+
+- name: Remove Clementine
+  apt:
+    name: clementine
+    state: absent
+  tags:
+    - uninstall
