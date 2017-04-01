@@ -1,0 +1,9 @@
+---
+
+- name: Linux Setup Playbook
+  hosts: localhost
+  connection: local
+  sudo: yes
+  gather_facts: False
+  roles:
+    - manage-apps
