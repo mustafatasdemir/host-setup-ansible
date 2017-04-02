@@ -8,6 +8,8 @@
   with_items:
     - terminator
     - python-pip
+    - vim
+  sudo: yes
   tags:
     - install
     - apps-system
@@ -18,6 +20,7 @@
   script: "{{ item }}"
   with_items:
     - "{{ apps_repo_script }}{{ add_apps_repo_folder }}{{ media_apps_repo }}"
+  sudo: yes
   tags:
     - install
     - add-repo
@@ -30,6 +33,7 @@
     update_cache: yes
   with_items:
     - clementine
+  sudo: yes
   tags:
     - install
     - apps-media
