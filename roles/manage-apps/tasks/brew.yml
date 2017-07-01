@@ -31,9 +31,9 @@
         dest: ~/.bashrc
         line: "{{ item }}"
       with_items:
-        - export PATH="$HOME/.linuxbrew/bin:$PATH"
-        - export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
-        - export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+        - export PATH="/home/linuxbrew/linuxbrew/.linuxbrew/bin:$PATH"
+        - export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
+        - export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
       tags:
         - install-brew
 
@@ -46,7 +46,6 @@
         - homebrew/versions
         - homebrew/completions
         - homebrew/bundle
-        - homebrew/apache
         - homebrew/nginx
         - homebrew/science
         - homebrew/aliases
