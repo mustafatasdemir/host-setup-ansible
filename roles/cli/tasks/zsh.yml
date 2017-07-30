@@ -14,11 +14,6 @@
     - zsh
   become: yes
 
-- name: Copy .zshrc file
-  copy:
-    src: .zshrc
-    dest: $HOME
-
 # ====================================================              Install Zsh
 - name: Installing Zsh
   command: brew install {{ item }}
@@ -41,6 +36,12 @@
 - name: Installing oh-my-zsh
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   become: yes
+
+# ====================================================        Copy zsh user file
+- name: Copy .zshrc file
+  copy:
+    src: /home/{{os_user_name}}/.zshrc
+    dest: $HOME
 
 # ====================================================           Configure Brew
 - name: Configure Brew Path
