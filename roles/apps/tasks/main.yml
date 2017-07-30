@@ -1,8 +1,3 @@
 ---
 
-#- include: install.yml
-#- include: uninstall.yml
-
-- include: brew.yml
-- include: common.yml
-- include: zsh.yml
+#- include: app.yml
