@@ -1,8 +1,3 @@
-- set_fact: os_user_name="{{ lookup('env','USER') }}"
-  register: user
-- debug:
-    msg: "Current user is {{user}}"
-
 # =================================                 Brew Prerequisites
 - name: Install Prerequisites for Brew
   apt:

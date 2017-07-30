@@ -1,9 +1,3 @@
-- set_fact: os_user_name="{{ lookup('env','USER') }}"
-  register: user
-- debug:
-    msg: "Current user is {{user}}"
-
-
 # ====================================================        Zsh Prerequisites
 - name: Install Prerequisites for Zsh
   apt:
@@ -91,8 +85,13 @@
 
 
 # ====================================================        Configure Plugins
-#- name: Change Zsh Theme
-#  lineinfile:
-#    dest: ~/.zshrc
-#    regexp: 'robbyrussell'
-#    replace: 'pygmalion'
+- name: Update Zsh File
+  lineinfile:
+    path: ~/.zshrc
+    regexp: 'ironstone'
+    replace: {{os_user_name}}
+
+
+# ====================================================    Install Powerlevel9k Theme
+- name: Installing Zsh
+  command: git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k

@@ -3,6 +3,7 @@
 - name: Linux Setup Playbook
   hosts: localhost
   connection: local
-  gather_facts: False
+  gather_facts: True
   roles:
-    - manage-apps
+#    - apps
+    - cli
