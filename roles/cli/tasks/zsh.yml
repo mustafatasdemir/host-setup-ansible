@@ -1,97 +1,91 @@
----
+- set_fact: os_user_name="{{ lookup('env','USER') }}"
+  register: user
+- debug:
+    msg: "Current user is {{user}}"
 
-- hosts: localhost
-  gather_facts: True
-  tasks:
+# ====================================================        Zsh Prerequisites
+- name: Install Prerequisites for Zsh
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - git
+    - git-core
+    - zsh
+  become: yes
 
-    - set_fact: os_user_name="{{ lookup('env','USER') }}"
-      register: user
-    - debug:
-        msg: "Current user is {{user}}"
+- name: Copy .zshrc file
+  copy:
+    src: .zshrc
+    dest: $HOME
 
-    # ====================================================        Zsh Prerequisites
-    - name: Install Prerequisites for Zsh
-      apt:
-        name: "{{ item }}"
-        update_cache: yes
-      with_items:
-        - git
-        - git-core
-        - zsh
-      become: yes
+# ====================================================              Install Zsh
+- name: Installing Zsh
+  command: brew install {{ item }}
+  with_items:
+    - zsh
+    - zsh-lovers
+    - z
+    - zsh-completions
+    - zsh-syntax-highlighting
+    - zsh-autosuggestions
+    - zsh-git-prompt
+    - zsh-history-substring-search
 
-    - name: Copy .zshrc file
-      copy:
-        src: .zshrc
-        dest: $HOME
-
-    # ====================================================              Install Zsh
-    - name: Installing Zsh
-      command: brew install {{ item }}
-      with_items:
-        - zsh
-        - zsh-lovers
-        - z
-        - zsh-completions
-        - zsh-syntax-highlighting
-        - zsh-autosuggestions
-        - zsh-git-prompt
-        - zsh-history-substring-search
-
-    # ====================================================        Create .z File for z
-    - name: Create .z File for z
-      shell: if [ ! -f "~/.z" ]; then touch "$HOME/.z"; fi
+# ====================================================        Create .z File for z
+- name: Create .z File for z
+  shell: if [ ! -f "~/.z" ]; then touch "$HOME/.z"; fi
 
 
-    # ====================================================        Install oh-my-zsh
-    - name: Installing oh-my-zsh
-      shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-      become: yes
+# ====================================================        Install oh-my-zsh
+- name: Installing oh-my-zsh
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  become: yes
 
-    # ====================================================           Configure Brew
-    - name: Configure Brew Path
-      lineinfile:
-        dest: ~/.zshrc
-        line: "{{ item }}"
-      with_items:
-        - export PATH="/home/{{os_user_name}}/.linuxbrew/bin:$PATH"
-        - export MANPATH="/home/{{os_user_name}}/.linuxbrew/share/man:$MANPATH"
-        - export INFOPATH="/home/{{os_user_name}}/.linuxbrew/share/info:$INFOPATH"
+# ====================================================           Configure Brew
+- name: Configure Brew Path
+  lineinfile:
+    dest: ~/.zshrc
+    line: "{{ item }}"
+  with_items:
+    - export PATH="/home/{{os_user_name}}/.linuxbrew/bin:$PATH"
+    - export MANPATH="/home/{{os_user_name}}/.linuxbrew/share/man:$MANPATH"
+    - export INFOPATH="/home/{{os_user_name}}/.linuxbrew/share/info:$INFOPATH"
 
-    # ====================================================        Configure Plugins
-    - name: Configure Zsh Plugins
-      lineinfile:
-        dest: ~/.zshrc
-        regexp: ^plugins=
-        line: "plugins=(git brew ruby sudo z)"
-      tags:
-        - install-zsh
-
-
-    # ====================================================        Configure Plugins
-    - name: Configure Zsh Completions
-      lineinfile:
-        dest: ~/.zshrc
-        line: "fpath=(/home/{{os_user_name}}/.linuxbrew/share/zsh-completions $fpath)"
+# ====================================================        Configure Plugins
+- name: Configure Zsh Plugins
+  lineinfile:
+    dest: ~/.zshrc
+    regexp: ^plugins=
+    line: "plugins=(git brew ruby sudo z)"
+  tags:
+    - install-zsh
 
 
-    # ====================================================        Configure Plugins
-    - name: Configure Zsh Syntax Highlighting
-      lineinfile:
-        dest: ~/.zshrc
-        line: "source /home/{{os_user_name}}/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# ====================================================        Configure Plugins
+- name: Configure Zsh Completions
+  lineinfile:
+    dest: ~/.zshrc
+    line: "fpath=(/home/{{os_user_name}}/.linuxbrew/share/zsh-completions $fpath)"
 
 
-    # ====================================================        Configure Plugins
-    - name: Configure Zsh Auto Suggestions
-      lineinfile:
-        dest: ~/.zshrc
-        line: "source /home/{{os_user_name}}/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# ====================================================        Configure Plugins
+- name: Configure Zsh Syntax Highlighting
+  lineinfile:
+    dest: ~/.zshrc
+    line: "source /home/{{os_user_name}}/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 
-    # ====================================================        Configure Plugins
-    - name: Change Zsh Theme
-      lineinfile:
-        dest: ~/.zshrc
-        regexp: 'robbyrussell'
-        replace: 'pygmalion'
+# ====================================================        Configure Plugins
+- name: Configure Zsh Auto Suggestions
+  lineinfile:
+    dest: ~/.zshrc
+    line: "source /home/{{os_user_name}}/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+
+# ====================================================        Configure Plugins
+#- name: Change Zsh Theme
+#  lineinfile:
+#    dest: ~/.zshrc
+#    regexp: 'robbyrussell'
+#    replace: 'pygmalion'

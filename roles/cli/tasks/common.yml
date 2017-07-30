@@ -1,28 +1,22 @@
----
+# ====================================================  Install via apt-get
+- name: Install Common System Tools (apt-get)
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - python-pip
+    - sshpass
+    - terminator
+  become: yes
 
-- hosts: localhost
-  gather_facts: True
-  tasks:
-
-    # ====================================================  Install via apt-get
-    - name: Install Common System Tools (apt-get)
-      apt:
-        name: "{{ item }}"
-        update_cache: yes
-      with_items:
-        - python-pip
-        - sshpass
-        - terminator
-      become: yes
-
-    # ====================================                     Install via brew
-    - name: Install Common System Tools (brew)
-      command: brew install {{ item }}
-      with_items:
-        - git
-        - htop
-        - pkgdiff
-        - translate-shell
-        - tree
-        - vim
-        - wget
+# ====================================                     Install via brew
+- name: Install Common System Tools (brew)
+  command: brew install {{ item }}
+  with_items:
+    - git
+    - htop
+    - pkgdiff
+    - translate-shell
+    - tree
+    - vim
+    - wget
