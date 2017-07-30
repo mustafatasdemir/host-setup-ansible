@@ -3,6 +3,7 @@
 - debug:
     msg: "Current user is {{user}}"
 
+
 # ====================================================        Zsh Prerequisites
 - name: Install Prerequisites for Zsh
   apt:
@@ -13,6 +14,7 @@
     - git-core
     - zsh
   become: yes
+
 
 # ====================================================              Install Zsh
 - name: Installing Zsh
@@ -27,21 +29,24 @@
     - zsh-git-prompt
     - zsh-history-substring-search
 
-# ====================================================        Create .z File for z
-- name: Create .z File for z
-  shell: if [ ! -f "~/.z" ]; then touch "$HOME/.z"; fi
-
 
 # ====================================================        Install oh-my-zsh
 - name: Installing oh-my-zsh
   shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-  become: yes
+  ignore_errors: yes
+
 
 # ====================================================        Copy zsh user file
 - name: Copy .zshrc file
   copy:
-    src: /home/{{os_user_name}}/.zshrc
-    dest: $HOME
+    src: .zshrc
+    dest: /home/{{os_user_name}}
+
+
+# ====================================================        Create .z File for z
+- name: Create .z File for z
+  shell: if [ ! -f "~/.z" ]; then touch "$HOME/.z"; fi
+
 
 # ====================================================           Configure Brew
 - name: Configure Brew Path
@@ -52,6 +57,7 @@
     - export PATH="/home/{{os_user_name}}/.linuxbrew/bin:$PATH"
     - export MANPATH="/home/{{os_user_name}}/.linuxbrew/share/man:$MANPATH"
     - export INFOPATH="/home/{{os_user_name}}/.linuxbrew/share/info:$INFOPATH"
+
 
 # ====================================================        Configure Plugins
 - name: Configure Zsh Plugins
