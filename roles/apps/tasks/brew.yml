@@ -1,0 +1,50 @@
+---
+
+- hosts: localhost
+  gather_facts: True
+  tasks:
+
+    # =================================                 Brew Prerequisites
+    - name: Install Prerequisites for Brew
+      apt:
+        name: "{{ item }}"
+        update_cache: yes
+      with_items:
+        - build-essential
+        - curl
+        - file
+        - python-setuptools
+        - ruby
+      become: yes
+
+    # =================================                       Install Brew
+    - name: Install Brew
+      apt:
+        name: "{{ item }}"
+        update_cache: yes
+      with_items:
+        - linuxbrew-wrapper
+      become: yes
+
+    # =================================                     Configure Brew
+    - name: Configure Brew
+      lineinfile:
+        dest: ~/.bashrc
+        line: "{{ item }}"
+      with_items:
+        - export PATH="/home/.linuxbrew/bin:$PATH"
+        - export MANPATH="/home/.linuxbrew/share/man:$MANPATH"
+        - export INFOPATH="/home/.linuxbrew/share/info:$INFOPATH"
+
+    # =================================               Install Common Taps
+    - name: Installing Common Taps
+      command: brew tap {{ item }}
+      with_items:
+        - homebrew/core
+        - homebrew/services
+        - homebrew/versions
+        - homebrew/completions
+        - homebrew/bundle
+        - homebrew/nginx
+        - homebrew/science
+        - homebrew/aliases
