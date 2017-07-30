@@ -1,7 +1,7 @@
 ---
 
 - hosts: localhost
-  gather_facts: False
+  gather_facts: True
   tasks:
 
     # ====================================================  Install via apt-get
@@ -13,9 +13,7 @@
         - python-pip
         - sshpass
         - terminator
-      sudo: yes
-      tags:
-        - install-common-tools
+      become: yes
 
     # ====================================                     Install via brew
     - name: Install Common System Tools (brew)
@@ -28,5 +26,3 @@
         - tree
         - vim
         - wget
-      tags:
-        - install-common-tools
