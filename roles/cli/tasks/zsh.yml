@@ -89,7 +89,7 @@
   lineinfile:
     path: ~/.zshrc
     regexp: 'ironstone'
-    replace: {{os_user_name}}
+    replace: "{{os_user_name}}"
 
 
 # ====================================================    Install Powerlevel9k Theme
