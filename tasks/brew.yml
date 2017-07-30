@@ -4,6 +4,11 @@
   gather_facts: True
   tasks:
 
+    - set_fact: os_user_name="{{ lookup('env','USER') }}"
+      register: user
+    - debug:
+        msg: "Current user is {{user}}"
+
     # =================================                 Brew Prerequisites
     - name: Install Prerequisites for Brew
       apt:
@@ -32,9 +37,9 @@
         dest: ~/.bashrc
         line: "{{ item }}"
       with_items:
-        - export PATH="/home/.linuxbrew/bin:$PATH"
-        - export MANPATH="/home/.linuxbrew/share/man:$MANPATH"
-        - export INFOPATH="/home/.linuxbrew/share/info:$INFOPATH"
+        - export PATH="/home/{{os_user_name}}/.linuxbrew/bin:$PATH"
+        - export MANPATH="/home/{{os_user_name}}/.linuxbrew/share/man:$MANPATH"
+        - export INFOPATH="/home/{{os_user_name}}/.linuxbrew/share/info:$INFOPATH"
 
     # =================================               Install Common Taps
     - name: Installing Common Taps
