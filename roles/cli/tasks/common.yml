@@ -20,3 +20,8 @@
     - tree
     - vim
     - wget
+
+# ====================================                     Install via brew
+- name: Install Common System Tools (pip)
+  pip:
+    name: ansible

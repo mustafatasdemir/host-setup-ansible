@@ -86,7 +86,7 @@
 
 # ====================================================        Configure Plugins
 - name: Update Zsh File
-  lineinfile:
+  replace:
     path: ~/.zshrc
     regexp: 'ironstone'
     replace: "{{os_user_name}}"
