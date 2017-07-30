@@ -10,7 +10,10 @@ pip install --upgrade ansible >> host.log 2>&1
 echo "Opening selection panel"
 sleep 3
 cmd=(dialog --separate-output --checklist "Select which categories to install:" 22 76 16)
-options=(cli-tools "Improved cli tools such as brew, zsh etc." off
+options=(cli-tools "" off
+         ---brew "A better package management" off
+         ---common "Common cli tools for productivity" off
+         ---zsh "A better terminal shell for productivity" off
          apps "Mostly GUI apps for media and browsing" off
          all "Install all options" off)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -21,6 +24,15 @@ do
         all)
             ansible-playbook setup.yml
             break
+            ;;
+        ---brew)
+            ansible-playbook setup.yml --tags brew
+            ;;
+        ---common)
+            ansible-playbook setup.yml --tags common
+            ;;
+        ---zsh)
+            ansible-playbook setup.yml --tags zsh
             ;;
         cli-tools)
             ansible-playbook setup.yml --tags cli
