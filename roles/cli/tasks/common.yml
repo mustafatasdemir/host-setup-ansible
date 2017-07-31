@@ -8,6 +8,7 @@
     - sshpass
     - terminator
     - vim
+    - htop
   become: yes
 
 # ====================================                     Install via brew

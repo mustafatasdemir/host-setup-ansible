@@ -13,3 +13,6 @@
 
 - include: zsh.yml
   tags: [zsh]
+
+- include: git.yml
+  tags: [git]

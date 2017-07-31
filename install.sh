@@ -14,6 +14,7 @@ options=(cli-tools "" off
          ---brew "A better package management" off
          ---common "Common cli tools for productivity" off
          ---zsh "A better terminal shell for productivity" off
+         ---git "Set git basic git configs with set variables" off
          apps "Mostly GUI apps for media and browsing" off
          all "Install all options" off)
 choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -33,6 +34,9 @@ do
             ;;
         ---zsh)
             ansible-playbook setup.yml --tags zsh
+            ;;
+        ---git)
+            ansible-playbook setup.yml --tags git
             ;;
         cli-tools)
             ansible-playbook setup.yml --tags cli
