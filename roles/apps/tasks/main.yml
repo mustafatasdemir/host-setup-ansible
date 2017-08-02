@@ -1,3 +1,7 @@
 ---
 
-#- include: app.yml
+#- include: development.yml
+- include: multimedia.yml
+- include: productivity.yml
+#- include: system.yml
+- include: web.yml

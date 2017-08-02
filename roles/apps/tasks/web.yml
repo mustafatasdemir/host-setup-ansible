@@ -1,0 +1,19 @@
+# Add apt repository
+- apt_repository:
+    repo: "{{ item }}"
+  with_items:
+    - ppa:ubuntu-mozilla-security/ppa
+    - ppa:deluge-team/ppa
+    - ppa:pidgin-developers/ppa
+  become: yes
+
+- name: Install Web Apps
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - thunderbird
+    - firefox
+    - deluge
+    - pidgin
+  become: yes

@@ -1,0 +1,15 @@
+## Add apt repository
+#- apt_repository:
+#    repo: "{{ item }}"
+#  with_items:
+#    - ppa:me-davidsansome/clementine
+#    - ppa:jmuc/cmus
+#  become: yes
+#
+#- name: Install Development Apps
+#  apt:
+#    name: "{{ item }}"
+#    update_cache: yes
+#  with_items:
+#    - vlc
+#  become: yes
