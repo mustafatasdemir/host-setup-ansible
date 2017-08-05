@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Updating packages"
+sudo apt-get update >> host.log 2>&1
 echo "Installing python-pip"
 sudo apt-get -y install python-pip >> host.log 2>&1
 echo "Installing ansible"
