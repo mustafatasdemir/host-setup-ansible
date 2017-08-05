@@ -1,0 +1,59 @@
+---
+
+- hosts: localhost
+  gather_facts: True
+  tasks:
+
+    - set_fact: os_user_name="{{ lookup('env','USER') }}"
+      register: user
+    - debug:
+        msg: "Current user is {{user}}"
+
+    # =================================                 Brew Prerequisites
+    - name: Install Prerequisites for Brew
+      apt:
+        name: "{{ item }}"
+        update_cache: yes
+      with_items:
+        - build-essential
+        - curl
+        - file
+        - python-setuptools
+        - ruby
+      become: yes
+
+    # =================================                       Install Brew
+    - name: Install Brew
+      apt:
+        name: "{{ item }}"
+        update_cache: yes
+      with_items:
+        - linuxbrew-wrapper
+      become: yes
+
+    # =================================                     Configure Brew
+    - name: Configure Brew
+      lineinfile:
+        dest: ~/.bashrc
+        line: "{{ item }}"
+      with_items:
+        - export PATH="/home/{{os_user_name}}/.linuxbrew/bin:$PATH"
+        - export MANPATH="/home/{{os_user_name}}/.linuxbrew/share/man:$MANPATH"
+        - export INFOPATH="/home/{{os_user_name}}/.linuxbrew/share/info:$INFOPATH"
+
+    # =================================               Install Common Taps
+    - name: Installing Common Taps
+      command: brew tap {{ item }}
+      with_items:
+        - homebrew/core
+        - homebrew/services
+        - homebrew/versions
+        - homebrew/completions
+        - homebrew/bundle
+        - homebrew/nginx
+        - homebrew/science
+        - homebrew/aliases
+
+    # ====================================================        Update Brew
+    - name: Update brew after installation
+      shell: brew prune ; brew tap --repair ; brew update ; brew outdated ; brew upgrade ; brew cleanup --force
