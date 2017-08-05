@@ -4,7 +4,7 @@
     name: user.name
     scope: global
     value: "{{ git_username }}"
-  when: git_username is defined
+  when: git_username is defined and git_username != ""
 
 # ====================================                  Change git user email
 - name: Git set user email
@@ -12,7 +12,7 @@
     name: user.email
     scope: global
     value: "{{ git_user_email }}"
-  when: git_user_email is defined
+  when: git_user_email is defined and git_user_email != ""
 
 # ====================================                  Change git user email
 - name: Set GPG signing key
@@ -20,7 +20,7 @@
     name: user.signingkey
     scope: global
     value: "{{ gpg_key_id }}"
-  when: gpg_key_id is defined
+  when: gpg_key_id is defined and gpg_key_id != ""
 
 # ====================================                  Set auto color
 - git_config:

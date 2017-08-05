@@ -3,7 +3,6 @@
     repo: "{{ item }}"
   with_items:
     - ppa:me-davidsansome/clementine
-    - ppa:jmuc/cmus
   become: yes
 
 - name: Install Multimedia Apps

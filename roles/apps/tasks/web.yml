@@ -4,7 +4,6 @@
   with_items:
     - ppa:ubuntu-mozilla-security/ppa
     - ppa:deluge-team/ppa
-    - ppa:pidgin-developers/ppa
   become: yes
 
 - name: Install Web Apps
