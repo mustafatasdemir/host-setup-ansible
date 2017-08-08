@@ -13,4 +13,5 @@
     - vlc
     - clementine
     - cmus
+    - kazam
   become: yes
