@@ -42,3 +42,7 @@
     - homebrew/nginx
     - homebrew/science
     - homebrew/aliases
+
+# ====================================================        Update Brew
+- name: Update brew after installation
+  shell: brew prune ; brew tap --repair ; brew update ; brew outdated ; brew upgrade ; brew cleanup --force

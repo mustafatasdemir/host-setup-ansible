@@ -5,12 +5,14 @@
 - debug:
     msg: "Current user is {{user}}"
 
+- include: brew.yml
+  tags: [brew]
 
 - include: common.yml
   tags: [common]
 
-- include: brew.yml
-  tags: [brew]
-
 - include: zsh.yml
   tags: [zsh]
+
+- include: git.yml
+  tags: [git]

@@ -1,0 +1,16 @@
+# Add apt repository
+- apt_repository:
+    repo: "{{ item }}"
+  with_items:
+    - ppa:me-davidsansome/clementine
+  become: yes
+
+- name: Install Multimedia Apps
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - vlc
+    - clementine
+    - cmus
+  become: yes

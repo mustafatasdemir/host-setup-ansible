@@ -1,6 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Export xterm color
 export TERM="xterm-256color"
 
 # Path to your oh-my-zsh installation.
@@ -13,8 +14,7 @@ export ZSH=/home/ironstone/.oh-my-zsh
 ZSH_THEME="pygmalion"
 #ZSH_THEME="powerlevel9k/powerlevel9k"
 
-
-# Powerlevel theme settings
+# Powerlevel9K theme settings
 POWERLEVEL9K_MODE="awesome-patched"
 
 POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
@@ -69,7 +69,7 @@ POWERLEVEL9K_TIME_FORMAT="%D{%H:%M}"
 # Left prompt with context
 #POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator context dir dir_writable vcs)
 # Left prompt without context
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator context dir dir_writable vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir dir_writable vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time time)
 POWERLEVEL9K_SHOW_CHANGESET=true
 
@@ -165,25 +165,19 @@ zstyle ':completion:*:manuals' separate-sections true
 
 # My Aliases
 
-# Open current location in file browser
-alias open='nautilus .'
-
-# Enable auto-color for listing
+# Common ls aliases
+alias cd..='cd ..'
 alias ls='ls --color=auto'
-
+alias l='ls -lF'
+alias la='ls -lah'
+alias ls-l='ls -l'
+# List only directories
+alias ldi='ls -d */'
+alias dir='dir --color=auto'
 # Show only hidden files
 alias lh='ls -d .* --color=auto'
 
-# List directories
-alias dir='dir --color=auto'
-
-# List only directories
-alias ldi='ls -d */'
-
-## get rid of command not found ##
-alias cd..='cd ..'
-
-## a quick way to get out of current directory ##
+## A quick way to get out of current directory
 alias ..='cd ..'
 alias ...='cd ../../../'
 alias ....='cd ../../../../'
@@ -192,11 +186,13 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias lsa='ls -a'
+alias vi=vim
+alias ping='ping -c 3'
 
 alias h='history'
 
 alias tgz='tar -czvf'
 
 alias st='subl . &> /dev/null &'
+
 alias bubu='brew prune ; brew tap --repair ; brew update ; brew outdated ; brew upgrade ; brew cleanup --force'

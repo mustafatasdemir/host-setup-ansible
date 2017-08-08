@@ -93,5 +93,5 @@
 
 
 # ====================================================    Install Powerlevel9k Theme
-- name: Installing Zsh
+- name: Installing Powerlevel9k Theme
   command: git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k

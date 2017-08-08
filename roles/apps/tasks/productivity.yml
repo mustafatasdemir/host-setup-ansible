@@ -1,0 +1,18 @@
+# Add apt repository
+- apt_repository:
+    repo: "{{ item }}"
+  with_items:
+    - ppa:webupd8team/sublime-text-2
+    - ppa:webupd8team/atom
+    - ppa:gottcode/gcppa
+  become: yes
+
+- name: Install Productivity Apps
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - sublime-text
+    - atom
+    - focuswriter
+  become: yes

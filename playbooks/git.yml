@@ -1,0 +1,40 @@
+---
+
+- hosts: localhost
+  gather_facts: True
+  tasks:
+
+    - set_fact: os_user_name="{{ lookup('env','USER') }}"
+      register: user
+    - debug:
+        msg: "Current user is {{user}}"
+
+    # ====================================================  Change git user name
+    - name: Git set user name
+      git_config:
+        name: user.name
+        scope: global
+        value: "{{ git_username }}"
+      when: git_username is defined and git_username != ""
+
+    # ====================================                  Change git user email
+    - name: Git set user email
+      git_config:
+        name: user.email
+        scope: global
+        value: "{{ git_user_email }}"
+      when: git_user_email is defined and git_user_email != ""
+
+    # ====================================                  Change git user email
+    - name: Set GPG signing key
+      git_config:
+        name: user.signingkey
+        scope: global
+        value: "{{ gpg_key_id }}"
+      when: gpg_key_id is defined and gpg_key_id != ""
+
+    # ====================================                  Set auto color
+    - git_config:
+        name: color.ui
+        scope: global
+        value: true

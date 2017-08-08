@@ -7,21 +7,19 @@
     - python-pip
     - sshpass
     - terminator
+    - vim
+    - htop
   become: yes
 
 # ====================================                     Install via brew
 - name: Install Common System Tools (brew)
   command: brew install {{ item }}
   with_items:
-    - git
-    - htop
     - pkgdiff
     - translate-shell
     - tree
-    - vim
-    - wget
 
 # ====================================                     Install via brew
 - name: Install Common System Tools (pip)
   pip:
-    name: ansible
+    name: requests

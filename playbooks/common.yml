@@ -4,6 +4,11 @@
   gather_facts: True
   tasks:
 
+    - set_fact: os_user_name="{{ lookup('env','USER') }}"
+      register: user
+    - debug:
+        msg: "Current user is {{user}}"
+
     # ====================================================  Install via apt-get
     - name: Install Common System Tools (apt-get)
       apt:
@@ -13,16 +18,19 @@
         - python-pip
         - sshpass
         - terminator
+        - vim
+        - htop
       become: yes
 
     # ====================================                     Install via brew
     - name: Install Common System Tools (brew)
       command: brew install {{ item }}
       with_items:
-        - git
-        - htop
         - pkgdiff
         - translate-shell
         - tree
-        - vim
-        - wget
+
+    # ====================================                     Install via brew
+    - name: Install Common System Tools (pip)
+      pip:
+        name: requests

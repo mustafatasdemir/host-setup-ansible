@@ -5,5 +5,5 @@
   connection: local
   gather_facts: True
   roles:
-#    - apps
-    - cli
+    - { role: cli, tags: [ 'cli' ] }
+    - { role: apps, tags: [ 'apps' ] }
