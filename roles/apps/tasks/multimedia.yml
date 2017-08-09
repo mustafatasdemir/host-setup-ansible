@@ -3,6 +3,8 @@
     repo: "{{ item }}"
   with_items:
     - ppa:me-davidsansome/clementine
+    - ppa:openshot.developers/ppa
+    - ppa:peek-developers/stable
   become: yes
 
 - name: Install Multimedia Apps
@@ -14,4 +16,7 @@
     - clementine
     - cmus
     - kazam
+    - vokoscreen
+    - openshot-qt
+    - peek
   become: yes

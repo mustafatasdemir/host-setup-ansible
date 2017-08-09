@@ -1,14 +1,14 @@
-# Add apt repository
+ Add apt repository
 - apt_repository:
     repo: "{{ item }}"
   with_items:
-    - ppa:linuxgndu/sqlitebrowser-testing
+    - ppa:dreibh/ppa
   become: yes
 
-- name: Install Development Apps
+- name: Install Networking Apps
   apt:
     name: "{{ item }}"
     update_cache: yes
   with_items:
-    - sqlitebrowser
+    - wireshark
   become: yes
