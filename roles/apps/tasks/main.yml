@@ -1,7 +1,24 @@
 ---
 
+- set_fact: os_user_name="{{ lookup('env','USER') }}"
+  register: user
+- debug:
+    msg: "Current user is {{user}}"
+
 #- include: development.yml
+#  tags: [development]
+
 - include: multimedia.yml
+  tags: [multimedia]
+
 - include: productivity.yml
-#- include: system.yml
+  tags: [productivity]
+
+- include: system.yml
+  tags: [system]
+
 - include: web.yml
+  tags: [web]
+
+- include: network.yml
+  tags: [network]

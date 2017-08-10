@@ -1,14 +1,15 @@
-## Add apt repository
+# Add apt repository
 #- apt_repository:
 #    repo: "{{ item }}"
 #  with_items:
 #    -
 #  become: yes
-#
-#- name: Install System Apps
-#  apt:
-#    name: "{{ item }}"
-#    update_cache: yes
-#  with_items:
-#    - synaptic
-#  become: yes
+
+- name: Install System Apps
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - synaptic
+    - gdebi
+  become: yes

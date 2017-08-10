@@ -18,6 +18,7 @@
     - pkgdiff
     - translate-shell
     - tree
+    - sqlite
 
 # ====================================                     Install via brew
 - name: Install Common System Tools (pip)
