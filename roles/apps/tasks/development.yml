@@ -11,4 +11,5 @@
     update_cache: yes
   with_items:
     - sqlitebrowser
+    - vagrant
   become: yes
