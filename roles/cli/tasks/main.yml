@@ -16,3 +16,6 @@
 
 - include: git.yml
   tags: [git]
+
+- include: jekyll.yml
+  tags: [jekyll]

@@ -1,0 +1,26 @@
+# ====================================================  Install via apt-get
+- name: Install Jekyll Pre-requisites
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - ruby
+    - ruby-dev
+    - make
+    - gcc
+  become: yes
+
+# ====================================                     Install via gem
+- name: Install Jekyll
+  gem:
+    name: "{{ item }}"
+    state: latest
+    user_install: no
+  with_items:
+    - jekyll
+    - bundler
+  become: yes
+  register: deneme
+
+- debug:
+    msg: "{{deneme}}"
