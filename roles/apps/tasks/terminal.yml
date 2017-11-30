@@ -1,0 +1,14 @@
+# Add apt repository
+- apt_repository:
+    repo: "{{ item }}"
+  with_items:
+    - ppa:noobslab/apps
+  become: yes
+
+- name: Install Terminal Apps
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - cool-retro-term
+  become: yes

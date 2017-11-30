@@ -19,6 +19,7 @@
     - translate-shell
     - tree
     - sqlite
+    - lolcat
 
 # ====================================                     Install via brew
 - name: Install Common System Tools (pip)

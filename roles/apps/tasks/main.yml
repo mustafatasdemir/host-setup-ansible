@@ -22,3 +22,6 @@
 
 - include: network.yml
   tags: [network]
+
+- include: terminal.yml
+  tags: [terminal]
